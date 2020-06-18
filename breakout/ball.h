@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "paddle.h"
+#include "player.h"
 
 class ball 
 {
@@ -18,6 +19,8 @@ private:
 	bool isCollidingPaddleLeft;
 	bool isCollidingPaddleright;
 	float randAngle;
+	int BallX;
+	int BallY;
 
 public:
 
@@ -28,7 +31,7 @@ public:
 
 	void drawBall(sf::RenderWindow& app);
 	void ballMove(paddle Paddle);
-	void ballCollision(paddle Paddle);
+	void ballCollision(paddle Paddle, int brickfield[20][5], score *Score);
 
 	ball(paddle Paddle, sf::Clock& clock);
 	~ball();

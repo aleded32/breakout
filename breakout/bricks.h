@@ -1,6 +1,6 @@
 #pragma once
-#define MAX_ROW 3
-#define MAX_COLUMN 6
+#define MAX_ROW 20
+#define MAX_COLUMN 5
 
 
 //include files
@@ -20,7 +20,7 @@ private:
 
 public:
 
-	void spawnBricks(sf::RenderWindow& app, int bricksField[5][3]);
+	void spawnBricks(sf::RenderWindow& app, int bricksField[20][5]);
 
 	bricks();
 	~bricks();

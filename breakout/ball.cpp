@@ -35,40 +35,44 @@ void ball::ballMove(paddle Paddle)
 		
 		if(isCollidingTop ==false)
 		{
-			randAngle = rand()% 1500 + 750;
+			randAngle = rand()% 35 + 150;
 			this->y -= (this->ballSpeed * 75)* this->dt;
 			
 			if(isCollidingPaddleLeft == true)
 			{
-
-				this->x -= sin(randAngle * dt);
+				this->x -= sin(randAngle) * 0.1;
 			}
 			else if(isCollidingPaddleright == true)
 			{
-				this->x += sin(randAngle * dt);
+
+				this->x += sin(randAngle) * 0.1;
 			}
 		}
 		else if(isCollidingTop == true)
 		{
-			randAngle = rand()% 1500 + 750;
+			randAngle = rand()% 35 + 150;
 			this->y += (this->ballSpeed * 75)* this->dt;
 			
 		}
 		if(isCollidingLeft == true)
 		{
-			this ->x += sin(randAngle * dt);
+			this ->x += sin(randAngle) * 0.15;
 			
 		}
 		else if(isCollidingRight == true)
 		{
-			this ->x -= sin(randAngle * dt);
+			this ->x -= sin(randAngle) * 0.15;
 		}
+		
 	}
 		this->SpriteBall.setPosition(x, y);
 }
 
-void ball::ballCollision(paddle Paddle)
+void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score)
 {
+	this ->BallX = (int)this->x/80;
+	this ->BallY = (int)this->y/35;
+
 	if(this->isBallMoving == true)
 	{
 		
@@ -101,16 +105,31 @@ void ball::ballCollision(paddle Paddle)
 			isCollidingLeft = true;
 			isCollidingRight = false;
 		}
-		if(this ->x >399)
+		else if(this ->x >390)
 		{
 			isCollidingLeft = false;
 			isCollidingRight = true;
 		}
-		if(this ->y > 699)
+		else if(this ->y > 699)
 		{
 			isBallMoving= false;
 		}
 		
+		std::cout << BallX;
+
+		if(brickField[BallY][BallX] == 1 && isCollidingTop == false)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = true;
+			Score ->Score +=1;
+		}
+		else if(brickField[BallY][BallX] == 1 && isCollidingTop == true)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = false;
+			Score ->Score +=1;
+		}
+
 	}
 }
 
