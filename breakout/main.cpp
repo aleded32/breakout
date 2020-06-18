@@ -5,6 +5,7 @@
 
 #include "paddle.h"
 #include "bricks.h"
+#include "ball.h"
 
 
 //main 
@@ -13,8 +14,13 @@ int main()
 	//clock
 	sf::Clock clock;
 
-	//collision boolean (subject to movement)
-	bool ispaddleCollidingEdge = false;
+	int bricksField[5][3] =
+	{
+		0,0,0,0,0,
+		0,0,0,0,0,
+		0,0,0,0,0,
+	};
+
 
 	//window
 	sf::RenderWindow app(sf::VideoMode(400,700), "breakout");
@@ -22,14 +28,17 @@ int main()
 	//class pointers
 	paddle *ptrPaddle;
 	bricks *ptrBricks;
+	ball *ptrBall;
 
 	//classes
 	paddle Paddle(clock);
 	bricks Bricks;
+	ball Ball(Paddle,clock);
 
 	//point to class address
 	ptrPaddle = &Paddle;
 	ptrBricks = &Bricks;
+	ptrBall = &Ball;
 
 	sf::Event e;
 
@@ -45,11 +54,18 @@ int main()
 
 		ptrPaddle ->paddleMove();
 
+		ptrBall ->ballCollision(Paddle);
+
+		ptrBall ->ballMove(Paddle);
+
+
 		app.clear();
 
 		ptrPaddle ->drawPaddle(app);
 
-		ptrBricks ->spawnBricks(app);
+		ptrBricks ->spawnBricks(app, bricksField);
+
+		ptrBall ->drawBall(app);
 
 		app.display();
 

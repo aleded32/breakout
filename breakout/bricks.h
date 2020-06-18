@@ -4,6 +4,8 @@
 
 
 //include files
+#pragma once
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -14,11 +16,11 @@ private:
 	 
 	
 	sf::RectangleShape block;
-
+	sf::Color bricksColour[2];
 
 public:
 
-	void spawnBricks(sf::RenderWindow& app);
+	void spawnBricks(sf::RenderWindow& app, int bricksField[5][3]);
 
 	bricks();
 	~bricks();

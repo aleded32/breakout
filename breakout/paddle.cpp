@@ -12,27 +12,28 @@ void paddle::paddleMove()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		x -= 0.5 * dt;
+		this->x -= 0.2 * this->dt;
+		
 		
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		x += 0.5 * dt;
+		this->x += 0.2 * this->dt;
 		
 	}
-	Paddle.setPosition(x, y);
+	this->Paddle.setPosition(x, y);
 }
 
 void paddle::worldCollision()
 {
 	if(x < 1 && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		x = 1;
+		this->x = 1;
 		
 	}
 	else if(x + Paddle.getGlobalBounds().width >399 && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		x = 399 - Paddle.getGlobalBounds().width;
+		this->x = 399 - this->Paddle.getGlobalBounds().width;
 	}
 	
 }
@@ -40,12 +41,12 @@ void paddle::worldCollision()
 //paddle constuctor
 paddle::paddle(sf::Clock& clock)
 {
-	x = 200.0f;
-	y = 600.0f;
-	Paddle.setSize(sf::Vector2f(100, 20));
-	Paddle.setFillColor(sf::Color::Green);
-	Paddle.setPosition(x, y);
-	dt = clock.restart().asSeconds();
+	this->x = 200.0f;
+	this->y = 600.0f;
+	this->Paddle.setSize(sf::Vector2f(120, 20));
+	this ->Paddle.setFillColor(sf::Color::Green);
+	this ->Paddle.setPosition(x, y);
+	this->dt = clock.restart().asSeconds();
 	
 }
 

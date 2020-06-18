@@ -12,9 +12,11 @@ private:
 
 	sf::RectangleShape Paddle;
 	float dt;
-	float x,y;
+
 
 public:
+	
+		float x,y;
 
 	paddle(sf::Clock& clock);
 	~paddle();
