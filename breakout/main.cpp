@@ -87,9 +87,9 @@ int main()
 
 		ptrPaddle ->paddleMove(ptrLives);
 
-		ptrBall ->ballCollision(Paddle, bricksField, ptrScore, ptrLives);
+		ptrBall ->ballCollision(ptrPaddle, bricksField, ptrScore, ptrLives);
 
-		ptrBall ->ballMove(Paddle, ptrLives);
+		ptrBall ->ballMove(ptrPaddle, ptrLives);
 
 		ptrBricks ->addBricks(clock, bricksField, ptrLives);
 

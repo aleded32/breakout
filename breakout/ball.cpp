@@ -8,7 +8,7 @@ void ball::drawBall(sf::RenderWindow& app)
 }
 
 
-void ball::ballMove(paddle Paddle, lives *Lives)
+void ball::ballMove(paddle *Paddle, lives *Lives)
 {
 	if(Lives->isgameOver == false)
 	{
@@ -16,17 +16,18 @@ void ball::ballMove(paddle Paddle, lives *Lives)
 		{
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				this->x = Paddle.x +40;
-				this->y = Paddle.y -10;
+				this->x = Paddle->x +40;
+				this->y = Paddle->y -10;
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				this->x = Paddle.x +40;
-				this->y = Paddle.y -10;
+				this->x = Paddle->x +40;
+				this->y = Paddle->y -10;
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isBallMoving == false)
 			{
-				this->isBallMoving =true;
+				if(this ->y < 695)
+					this->isBallMoving =true;
 			}
 
 		}
@@ -72,7 +73,7 @@ void ball::ballMove(paddle Paddle, lives *Lives)
 
 	}
 
-void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score, lives *Lives)
+void ball::ballCollision(paddle *Paddle, int brickField[20][5], score *Score, lives *Lives)
 {
 	this ->BallX = (int)this->x/80;
 	this ->BallY = (int)this->y/35;
@@ -86,19 +87,19 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score, liv
 			isCollidingTop = true;
 			
 		}
-		else if(this->y == Paddle.y - 10 && this->x >= Paddle.x && this->x <= Paddle.x + 30)
+		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x && this->x <= Paddle->x + 30)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = true;
 			isCollidingPaddleright = false;
 		}
-		else if(this->y == Paddle.y - 10 && this->x >= Paddle.x + 31 && this->x <= Paddle.x + 60)
+		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y && this->x >= Paddle->x + 31 && this->x <= Paddle->x + 60)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
 			isCollidingPaddleright = true;
 		}
-		else if(this->y == Paddle.y - 10 && this->y <= Paddle.y  && this->x >= Paddle.x + 61 && this->x <= Paddle.x + 90)
+		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x + 61 && this->x <= Paddle->x + 90)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
@@ -120,6 +121,9 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score, liv
 			Lives->Lives -= 1;
 			if(Lives->Lives <=0)
 				Lives->isgameOver = true;
+			else
+				this ->x = Paddle->x + 40;
+				this ->y = Paddle->y - 10;
 		}
 		
 		
