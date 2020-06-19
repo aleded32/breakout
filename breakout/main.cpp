@@ -7,6 +7,7 @@
 #include "bricks.h"
 #include "ball.h"
 #include "player.h"
+#include "sound.h"
 
 
 //main 
@@ -49,6 +50,7 @@ int main()
 	ball *ptrBall;
 	score *ptrScore;
 	lives *ptrLives;
+	music *ptrMusic;
 
 
 	//classes
@@ -57,6 +59,7 @@ int main()
 	ball Ball(Paddle,clock);
 	score Score;
 	lives Lives;
+	music Music;
 
 	//point to class address
 	ptrPaddle = &Paddle;
@@ -64,6 +67,9 @@ int main()
 	ptrBall = &Ball;
 	ptrScore = &Score;
 	ptrLives =&Lives;
+	ptrMusic = &Music;
+
+	ptrMusic ->playMusic();
 
 	sf::Event e;
 
@@ -75,9 +81,11 @@ int main()
 			app.close();
 		}
 
+		
+
 		ptrPaddle ->worldCollision();
 
-		ptrPaddle ->paddleMove();
+		ptrPaddle ->paddleMove(ptrLives);
 
 		ptrBall ->ballCollision(Paddle, bricksField, ptrScore, ptrLives);
 
@@ -96,11 +104,14 @@ int main()
 
 		ptrLives ->drawText(app);
 
+		
+
+		ptrBricks ->spawnBricks(app, bricksField, ptrLives);
+
 		ptrPaddle ->drawPaddle(app);
 
-		ptrBricks ->spawnBricks(app, bricksField);
-
 		ptrBall ->drawBall(app);
+		
 
 		app.display();
 

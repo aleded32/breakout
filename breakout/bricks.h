@@ -22,7 +22,7 @@ private:
 
 public:
 
-	void spawnBricks(sf::RenderWindow& app, int bricksField[20][5]);
+	void spawnBricks(sf::RenderWindow& app, int bricksField[20][5], lives *Lives);
 	void addBricks(sf::Clock& clock, int bricksField[20][5], lives *Lives);
 
 	bricks();

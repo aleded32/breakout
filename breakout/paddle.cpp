@@ -8,18 +8,21 @@ void paddle::drawPaddle(sf::RenderWindow& app)
 	 app.draw(this ->Paddle);
 }
 
-void paddle::paddleMove()
+void paddle::paddleMove(lives *Lives)
 {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if(Lives ->isgameOver == false)
 	{
-		this->x -= 0.2 * this->dt;
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			this->x -= 0.2 * this->dt;
 		
 		
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		this->x += 0.2 * this->dt;
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			this->x += 0.2 * this->dt;
 		
+		}
 	}
 	this->Paddle.setPosition(x, y);
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-
+#include "player.h"
 
 class paddle
 {
@@ -23,7 +23,7 @@ public:
 	
 	
 	void drawPaddle(sf::RenderWindow& app);
-	void paddleMove();
+	void paddleMove(lives *Lives);
 	void worldCollision();
 
 };

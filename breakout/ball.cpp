@@ -86,19 +86,19 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score, liv
 			isCollidingTop = true;
 			
 		}
-		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x && this->x <= Paddle.x + 30)
+		else if(this->y == Paddle.y - 10 && this->x >= Paddle.x && this->x <= Paddle.x + 30)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = true;
 			isCollidingPaddleright = false;
 		}
-		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x + 31 && this->x <= Paddle.x + 60)
+		else if(this->y == Paddle.y - 10 && this->x >= Paddle.x + 31 && this->x <= Paddle.x + 60)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
 			isCollidingPaddleright = true;
 		}
-		else if(this->y >= Paddle.y - 10 && this->y <= Paddle.y  && this->x >= Paddle.x + 61 && this->x <= Paddle.x + 90)
+		else if(this->y == Paddle.y - 10 && this->y <= Paddle.y  && this->x >= Paddle.x + 61 && this->x <= Paddle.x + 90)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
