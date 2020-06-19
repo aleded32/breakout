@@ -30,8 +30,8 @@ public:
 	float ballSpeed;
 
 	void drawBall(sf::RenderWindow& app);
-	void ballMove(paddle Paddle);
-	void ballCollision(paddle Paddle, int brickfield[20][5], score *Score);
+	void ballMove(paddle Paddle, lives *Lives);
+	void ballCollision(paddle Paddle, int brickfield[20][5], score *Score, lives *Lives);
 
 	ball(paddle Paddle, sf::Clock& clock);
 	~ball();

@@ -17,10 +17,10 @@ int main()
 
 	int bricksField[20][5] =
 	{
+		1,1,1,1,1,
+		1,1,1,1,1,
 		0,0,0,0,0,
-		1,1,1,1,1,
-		1,1,1,1,1,
-		1,1,1,1,1,
+		0,0,0,0,0,
 		0,0,0,0,0,
 		0,0,0,0,0,
 		0,0,0,0,0,
@@ -48,6 +48,7 @@ int main()
 	bricks *ptrBricks;
 	ball *ptrBall;
 	score *ptrScore;
+	lives *ptrLives;
 
 
 	//classes
@@ -55,12 +56,14 @@ int main()
 	bricks Bricks;
 	ball Ball(Paddle,clock);
 	score Score;
+	lives Lives;
 
 	//point to class address
 	ptrPaddle = &Paddle;
 	ptrBricks = &Bricks;
 	ptrBall = &Ball;
 	ptrScore = &Score;
+	ptrLives =&Lives;
 
 	sf::Event e;
 
@@ -76,16 +79,22 @@ int main()
 
 		ptrPaddle ->paddleMove();
 
-		ptrBall ->ballCollision(Paddle, bricksField, ptrScore);
+		ptrBall ->ballCollision(Paddle, bricksField, ptrScore, ptrLives);
 
-		ptrBall ->ballMove(Paddle);
+		ptrBall ->ballMove(Paddle, ptrLives);
+
+		ptrBricks ->addBricks(clock, bricksField, ptrLives);
 
 		ptrScore ->SetText();
+
+		ptrLives ->SetText();
 
 		
 		app.clear();
 
 		ptrScore ->drawText(app);
+
+		ptrLives ->drawText(app);
 
 		ptrPaddle ->drawPaddle(app);
 

@@ -1,14 +1,8 @@
-﻿Build started 18/06/2020 22:49:43.
+﻿Build started 19/06/2020 14:47:38.
      1>Project "D:\GitHub\breakout\breakout\breakout.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.4.2(Win32 - Visual Studio 2012)\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ball.cpp
-         ball.cpp
-     1>d:\github\breakout\breakout\ball.cpp(38): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>d:\github\breakout\breakout\ball.cpp(43): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\github\breakout\breakout\ball.cpp(48): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\github\breakout\breakout\ball.cpp(53): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>d:\github\breakout\breakout\ball.cpp(59): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\github\breakout\breakout\ball.cpp(64): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.4.2(Win32 - Visual Studio 2012)\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\GitHub\breakout\Debug\breakout.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\SFML-2.4.2(Win32 - Visual Studio 2012)\lib" "sfml-system-d.lib" "sfml-graphics-d.lib" "sfml-audio-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\GitHub\breakout\Debug\breakout.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\GitHub\breakout\Debug\breakout.lib" /MACHINE:X86 Debug\ball.obj
          Debug\bricks.obj

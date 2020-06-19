@@ -43,7 +43,7 @@ paddle::paddle(sf::Clock& clock)
 {
 	this->x = 200.0f;
 	this->y = 600.0f;
-	this->Paddle.setSize(sf::Vector2f(120, 20));
+	this->Paddle.setSize(sf::Vector2f(90, 20));
 	this ->Paddle.setFillColor(sf::Color::Green);
 	this ->Paddle.setPosition(x, y);
 	this->dt = clock.restart().asSeconds();

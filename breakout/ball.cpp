@@ -8,67 +8,71 @@ void ball::drawBall(sf::RenderWindow& app)
 }
 
 
-void ball::ballMove(paddle Paddle)
+void ball::ballMove(paddle Paddle, lives *Lives)
 {
-	if(this->isBallMoving == false)
+	if(Lives->isgameOver == false)
 	{
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		if(this->isBallMoving == false)
 		{
-			this->x = Paddle.x +50;
-			this->y = Paddle.y -10;
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			{
+				this->x = Paddle.x +40;
+				this->y = Paddle.y -10;
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			{
+				this->x = Paddle.x +40;
+				this->y = Paddle.y -10;
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isBallMoving == false)
+			{
+				this->isBallMoving =true;
+			}
+
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		else if(this->isBallMoving == true)
 		{
-			this->x = Paddle.x +50;
-			this->y = Paddle.y -10;
+
+			srand((NULL));
+		
+			if(isCollidingTop ==false)
+			{
+				randAngle = rand()% 35 + 150;
+				this->y -= (this->ballSpeed * 75)* this->dt;
+			
+				if(isCollidingPaddleLeft == true)
+				{
+					this->x -= sin(randAngle) * 0.3;
+				}
+				else if(isCollidingPaddleright == true)
+				{
+
+					this->x += sin(randAngle) * 0.3;
+				}
+			}
+			else if(isCollidingTop == true)
+			{
+				randAngle = rand()% 35 + 150;
+				this->y += (this->ballSpeed * 75)* this->dt;
+			
+			}
+			if(isCollidingLeft == true)
+			{
+				this ->x += sin(randAngle) * 0.35;
+			
+			}
+			else if(isCollidingRight == true)
+			{
+				this ->x -= sin(randAngle) * 0.35;
+			}
+		
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isBallMoving == false)
-		{
-			this->isBallMoving =true;
-		}
+	}
+			this->SpriteBall.setPosition(x, y);
 
 	}
-	else if(this->isBallMoving == true)
-	{
 
-		srand((NULL));
-		
-		if(isCollidingTop ==false)
-		{
-			randAngle = rand()% 35 + 150;
-			this->y -= (this->ballSpeed * 75)* this->dt;
-			
-			if(isCollidingPaddleLeft == true)
-			{
-				this->x -= sin(randAngle) * 0.1;
-			}
-			else if(isCollidingPaddleright == true)
-			{
-
-				this->x += sin(randAngle) * 0.1;
-			}
-		}
-		else if(isCollidingTop == true)
-		{
-			randAngle = rand()% 35 + 150;
-			this->y += (this->ballSpeed * 75)* this->dt;
-			
-		}
-		if(isCollidingLeft == true)
-		{
-			this ->x += sin(randAngle) * 0.15;
-			
-		}
-		else if(isCollidingRight == true)
-		{
-			this ->x -= sin(randAngle) * 0.15;
-		}
-		
-	}
-		this->SpriteBall.setPosition(x, y);
-}
-
-void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score)
+void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score, lives *Lives)
 {
 	this ->BallX = (int)this->x/80;
 	this ->BallY = (int)this->y/35;
@@ -82,19 +86,19 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score)
 			isCollidingTop = true;
 			
 		}
-		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x && this->x <= Paddle.x + 40)
+		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x && this->x <= Paddle.x + 30)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = true;
 			isCollidingPaddleright = false;
 		}
-		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x + 81 && this->x <= Paddle.x + 120)
+		else if(this->y >= Paddle.y - 10 && this->x >= Paddle.x + 31 && this->x <= Paddle.x + 60)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
 			isCollidingPaddleright = true;
 		}
-		else if(this->y >= Paddle.y - 10 && this->y <= Paddle.y  && this->x >= Paddle.x + 41 && this->x <= Paddle.x + 80)
+		else if(this->y >= Paddle.y - 10 && this->y <= Paddle.y  && this->x >= Paddle.x + 61 && this->x <= Paddle.x + 90)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
@@ -110,12 +114,15 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score)
 			isCollidingLeft = false;
 			isCollidingRight = true;
 		}
-		else if(this ->y > 699)
+		else if(this ->y > 695)
 		{
 			isBallMoving= false;
+			Lives->Lives -= 1;
+			if(Lives->Lives <=0)
+				Lives->isgameOver = true;
 		}
 		
-		std::cout << BallX;
+		
 
 		if(brickField[BallY][BallX] == 1 && isCollidingTop == false)
 		{
@@ -138,7 +145,7 @@ void ball::ballCollision(paddle Paddle, int brickField[20][5], score *Score)
 ball::ball(paddle Paddle, sf::Clock& clock)
 {
 	
-	this ->x = Paddle.x + 50;
+	this ->x = Paddle.x + 40;
 	this ->y = Paddle.y - 10;
 	
 	this ->isCollidingTop = false;
@@ -147,7 +154,7 @@ ball::ball(paddle Paddle, sf::Clock& clock)
 	this ->isCollidingPaddleLeft = false;
 	this ->dt = clock.restart().asSeconds();
 	this ->isBallMoving = false;
-	this -> ballSpeed = 25.0f;
+	this -> ballSpeed = 60.0f;
 }
 
 ball::~ball()

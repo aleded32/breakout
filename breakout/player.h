@@ -20,7 +20,7 @@ public:
 	player();
 	~player();
 
-	void drawText();
+	void drawText(sf::RenderWindow& app);
 	void SetText();
 
 };
@@ -36,6 +36,25 @@ public:
 
 	score();
 	~score();
+
+private:
+
+	
+
+};
+
+
+class lives : public player
+{
+public:
+	
+	void drawText(sf::RenderWindow& app);
+	void SetText();
+	int Lives;
+	bool isgameOver;
+
+	lives();
+	~lives();
 
 private:
 
