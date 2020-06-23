@@ -14,14 +14,17 @@ void ball::ballMove(paddle *Paddle, lives *Lives)
 	{
 		if(this->isBallMoving == false)
 		{
+			this->x = Paddle->x + (Paddle ->Paddle.getGlobalBounds().width/2 - 5);
+			this->y = Paddle->y -10;
+
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				this->x = Paddle->x +40;
+				this->x = Paddle->x + (Paddle ->Paddle.getGlobalBounds().width/2 - 5);
 				this->y = Paddle->y -10;
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				this->x = Paddle->x +40;
+				this->x = Paddle->x + (Paddle ->Paddle.getGlobalBounds().width/2 - 5);
 				this->y = Paddle->y -10;
 			}
 			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && isBallMoving == false)
@@ -38,33 +41,33 @@ void ball::ballMove(paddle *Paddle, lives *Lives)
 		
 			if(isCollidingTop ==false)
 			{
-				randAngle = rand()% 35 + 150;
-				this->y -= (this->ballSpeed * 75)* this->dt;
+				randAngle = rand()% 80 + 120;
+				this->y -= (this->ballSpeed * 65)* this->dt;
 			
 				if(isCollidingPaddleLeft == true)
 				{
-					this->x -= sin(randAngle) * 0.3;
+					this->x -= sin(randAngle) * 0.15;
 				}
 				else if(isCollidingPaddleright == true)
 				{
 
-					this->x += sin(randAngle) * 0.3;
+					this->x += sin(randAngle) * 0.15;
 				}
 			}
 			else if(isCollidingTop == true)
 			{
-				randAngle = rand()% 35 + 150;
+				randAngle = rand()% 80 + 120;
 				this->y += (this->ballSpeed * 75)* this->dt;
 			
 			}
 			if(isCollidingLeft == true)
 			{
-				this ->x += sin(randAngle) * 0.35;
+				this ->x += sin(randAngle) * 0.15;
 			
 			}
 			else if(isCollidingRight == true)
 			{
-				this ->x -= sin(randAngle) * 0.35;
+				this ->x -= sin(randAngle) * 0.15;
 			}
 		
 		}
@@ -77,6 +80,7 @@ void ball::ballCollision(paddle *Paddle, int brickField[20][5], score *Score, li
 {
 	this ->BallX = (int)this->x/80;
 	this ->BallY = (int)this->y/35;
+	this ->PWtime = PWClock.getElapsedTime().asSeconds();
 
 	if(this->isBallMoving == true)
 	{
@@ -87,19 +91,19 @@ void ball::ballCollision(paddle *Paddle, int brickField[20][5], score *Score, li
 			isCollidingTop = true;
 			
 		}
-		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x && this->x <= Paddle->x + 30)
+		else if(this->y >= Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x && this->x <= Paddle->x + ballLeft)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = true;
 			isCollidingPaddleright = false;
 		}
-		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y && this->x >= Paddle->x + 31 && this->x <= Paddle->x + 60)
+		else if(this->y >= Paddle->y - 10 && this->y <= Paddle->y && this->x >= Paddle->x + ballMiddle1 && this->x <= Paddle->x + ballMiddle2)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
 			isCollidingPaddleright = true;
 		}
-		else if(this->y == Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x + 61 && this->x <= Paddle->x + 90)
+		else if(this->y >= Paddle->y - 10 && this->y <= Paddle->y  && this->x >= Paddle->x + ballRight1 && this->x <= Paddle->x + ballRight2)
 		{
 			isCollidingTop = false;
 			isCollidingPaddleLeft = false;
@@ -140,7 +144,67 @@ void ball::ballCollision(paddle *Paddle, int brickField[20][5], score *Score, li
 			isCollidingTop = false;
 			Score ->Score +=1;
 		}
-
+		else if(brickField[BallY][BallX] == 2 && isCollidingTop == false)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = true;
+			PWClock.restart();
+			Paddle ->Paddle.setSize(sf::Vector2f(45,20));
+			this ->ballLeft = 15;
+			this ->ballMiddle1 = 16;
+			this ->ballMiddle2 = 30;
+			this ->ballRight1 = 31;
+			this ->ballRight2 = 45;
+		}
+		else if(brickField[BallY][BallX] == 2 && isCollidingTop == true)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = false;
+			PWClock.restart();
+			Paddle ->Paddle.setSize(sf::Vector2f(45,20));
+			this ->ballLeft = 15;
+			this ->ballMiddle1 = 16;
+			this ->ballMiddle2 = 30;
+			this ->ballRight1 = 31;
+			this ->ballRight2 = 45;
+			
+		}else if(brickField[BallY][BallX] == 3 && isCollidingTop == false)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = true;
+			Score ->Score += 3;
+			PWClock.restart();
+			Paddle ->Paddle.setSize(sf::Vector2f(180,20));
+			this ->ballLeft = 60;
+			this ->ballMiddle1 = 61;
+			this ->ballMiddle2 = 120;
+			this ->ballRight1 = 121;
+			this ->ballRight2 = 180;
+		}
+		else if(brickField[BallY][BallX] == 3 && isCollidingTop == true)
+		{
+			brickField[BallY][BallX] = 0;
+			isCollidingTop = false;
+			Score ->Score += 3;
+			PWClock.restart();
+			Paddle ->Paddle.setSize(sf::Vector2f(180,20));
+			this ->ballLeft = 60;
+			this ->ballMiddle1 = 61;
+			this ->ballMiddle2 = 120;
+			this ->ballRight1 = 121;
+			this ->ballRight2 = 180;
+			
+		}
+		if(PWtime >= 5)
+		{
+			Paddle ->Paddle.setSize(sf::Vector2f(90,20));
+			this ->ballLeft = 30;
+			this ->ballMiddle1 = 31;
+			this ->ballMiddle2 = 60;
+			this ->ballRight1 = 61;
+			this ->ballRight2 = 90;
+			PWClock.restart();
+		}
 	}
 }
 
@@ -158,7 +222,12 @@ ball::ball(paddle Paddle, sf::Clock& clock)
 	this ->isCollidingPaddleLeft = false;
 	this ->dt = clock.restart().asSeconds();
 	this ->isBallMoving = false;
-	this -> ballSpeed = 60.0f;
+	this -> ballSpeed = 40.0f;
+	this ->ballLeft = 30;
+	this ->ballMiddle1 = 31;
+	this ->ballMiddle2 = 60;
+	this ->ballRight1 = 61;
+	this ->ballRight2 = 90;
 }
 
 ball::~ball()

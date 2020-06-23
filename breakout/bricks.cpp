@@ -1,33 +1,53 @@
 #include "bricks.h"
-
+#include <stdlib.h>
 
 void bricks::addBricks(sf::Clock& clock, int brickField[20][5], lives *Lives)
 {
-	this->time = clock.getElapsedTime().asSeconds();
-
+	this->timeBricks = clock.getElapsedTime().asSeconds();
+	srand(time(NULL));
+	this->randBrickTime = this->randClock.getElapsedTime().asSeconds();
+	
 	if(Lives->isgameOver == false)
 	{
-		if(this->time >= 9)
-		{
+
+		if(this->timeBricks >= 5)
+		{	
+			
+
+			this ->randBrick = rand()% 2 + 2;
+			this->randChancePW = rand()% 101;
+			this->randRow = rand()% 5;
+
+			
 			for(int i = MAX_ROW - 1; i > 0 ; i--)
 			{
 					for(int j = 0; j < MAX_COLUMN; j++)
 				{
 					brickField[i][j] =  brickField[i - 1][j];
+					if(this->randChancePW >= this->ChancePW)
 					brickField[i - 1][j] = 1;
 					
+					
 					clock.restart();
-
+					
 				}
 			}
+			
 		}
-		
-				
+		else if(randBrickTime >=5)
+		{
+				if(this->randChancePW <= this->ChancePW)
+				{
+						brickField[0][this->randRow] = this->randBrick;
+						this->randClock.restart();
+					
+				}
+		}	
 			
 		
 	}
 
-	std::cout << time << std::endl;
+	
 }
 
 
@@ -57,6 +77,11 @@ bricks::bricks()
 
 		this ->bricksColour[0] = sf::Color::Transparent;
 		this ->bricksColour[1] = sf::Color::Green;
+		this ->bricksColour[2] = sf::Color::Red;
+		this ->bricksColour[3] = sf::Color::Blue;
+		this ->ChancePW = 35;
+		
+		
 		
 }
 

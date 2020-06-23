@@ -17,10 +17,18 @@ private:
 	 
 	
 	sf::RectangleShape block;
-	sf::Color bricksColour[2];
-	float time;
+	sf::Color bricksColour[4];
+	float timeBricks;
+	int randChancePW;
+	int ChancePW;
+	int randBrick;
+	int randRow;
+	float randBrickTime;
+	sf::Clock randClock;
 
 public:
+
+	
 
 	void spawnBricks(sf::RenderWindow& app, int bricksField[20][5], lives *Lives);
 	void addBricks(sf::Clock& clock, int bricksField[20][5], lives *Lives);

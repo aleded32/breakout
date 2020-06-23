@@ -10,14 +10,14 @@ class paddle
 {
 private:
 
-	sf::RectangleShape Paddle;
+	
 	float dt;
 
 
 public:
 	
 		float x,y;
-
+	sf::RectangleShape Paddle;
 	paddle(sf::Clock& clock);
 	~paddle();
 	

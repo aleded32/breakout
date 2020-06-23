@@ -14,13 +14,13 @@ void paddle::paddleMove(lives *Lives)
 	{
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			this->x -= 0.2 * this->dt;
+			this->x -= 0.35 * this->dt;
 		
 		
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			this->x += 0.2 * this->dt;
+			this->x += 0.35 * this->dt;
 		
 		}
 	}

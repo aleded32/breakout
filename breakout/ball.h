@@ -21,6 +21,11 @@ private:
 	float randAngle;
 	int BallX;
 	int BallY;
+	int ballLeft;
+	int ballMiddle1, ballMiddle2;
+	int ballRight1, ballRight2;
+	sf::Clock PWClock;
+	float PWtime;
 
 public:
 
